@@ -1,0 +1,17 @@
+__pycache__/
+.env
+.DS_Store
+
+meeting_minutes/src/meeting_minutes/crews/gmailcrew/tools/credentials.json
+meeting_minutes/src/meeting_minutes/crews/gmailcrew/tools/token.json
+pdf_rag/db/
+master-crewai-course.code-workspace
+meeting_minutes/agentops.log
+01 - ai_latest_development
+02 - ai_news
+03 - poem_flow
+code_execution
+pdf_rag
+venv
+README.md
+requirements.txt
