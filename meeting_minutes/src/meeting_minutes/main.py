@@ -1,8 +1,9 @@
+#importing libraries
 from pydantic import BaseModel
 from crewai.flow.flow import Flow, listen, start
 from openai import OpenAI
 from pydub import AudioSegment
-from pydub.utils import make_chunks
+from pydub.utils import make_chunks               
 from pathlib import Path
 
 from crews.meeting_minutes_crew.meeting_minutes_crew import MeetingMinutesCrew
