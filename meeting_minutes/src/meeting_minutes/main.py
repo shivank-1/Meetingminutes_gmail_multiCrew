@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 from pydantic import BaseModel
 from crewai.flow.flow import Flow, listen, start
 from openai import OpenAI
