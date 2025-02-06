@@ -19,7 +19,7 @@ client = OpenAI()
 
 class MeetingMinutesState(BaseModel):
     transcript: str = ""
-    meeting_minutes: str = ""
+    meeting_minutes: str = ""  # Changed type hint to str
 
 
 class MeetingMinutesFlow(Flow[MeetingMinutesState]):
@@ -65,7 +65,8 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
             "transcript": self.state.transcript
         }
         meeting_minutes = crew.crew().kickoff(inputs)
-        self.state.meeting_minutes = meeting_minutes
+        # Convert CrewOutput to string by accessing its value
+        self.state.meeting_minutes = str(meeting_minutes)
 
     @listen(generate_meeting_minutes)
     def create_draft_meeting_minutes(self):
@@ -74,11 +75,12 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
         crew = GmailCrew()
 
         inputs = {
-            "body": self.state.meeting_minutes
+            "body": self.state.meeting_minutes  # Now self.state.meeting_minutes is a string
         }
 
         draft_crew = crew.crew().kickoff(inputs)
         print(f"Draft Crew: {draft_crew}")
+
 
 def kickoff():
     session = agentops.init(api_key=os.getenv("AGENTOPS_API_KEY"))
