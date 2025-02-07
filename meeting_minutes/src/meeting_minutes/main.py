@@ -17,9 +17,13 @@ load_dotenv()
 
 client = OpenAI()
 
-class MeetingMinutesState(BaseModel):
-    transcript: str = ""
-    meeting_minutes: str = ""  # Changed type hint to str
+#a container to store transcript and meeting minutes 
+class MeetingMinutesState(BaseModel):       #a class inhereting properties of a basemodel of pydantic
+                                            #pydantic's basemodel ensures structure and validation to "state" of MeetingMinutes flow
+                                            ###Validation in Pydantic means automatically checking that the data you assign to a model follows the expected data types and constraints. If the data does not match the expected format, Pydantic will raise an error.
+   
+    transcript: str = ""          #stores transcript of the meeting as a string
+    meeting_minutes: str = ""     #stores formatted meeting minutes of the meeting
 
 
 class MeetingMinutesFlow(Flow[MeetingMinutesState]):
@@ -47,7 +51,7 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
             
             with open(chunk_path, "rb") as audio_file:
                 transcription = client.audio.transcriptions.create(
-                    model="whisper-1", 
+                    model="whisper-1",                    ##an openai model to convert audio into text
                     file=audio_file
                 )
                 full_transcription += transcription.text + " "
