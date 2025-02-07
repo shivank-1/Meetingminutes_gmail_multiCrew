@@ -22,8 +22,8 @@ class MeetingMinutesState(BaseModel):       #a class inhereting properties of a 
                                             #pydantic's basemodel ensures structure and validation to "state" of MeetingMinutes flow
                                             ###Validation in Pydantic means automatically checking that the data you assign to a model follows the expected data types and constraints. If the data does not match the expected format, Pydantic will raise an error.
    
-    transcript: str = ""          #stores transcript of the meeting as a string
-    meeting_minutes: str = ""     #stores formatted meeting minutes of the meeting
+    transcript: str = ""          #to stores transcript of the meeting as a string
+    meeting_minutes: str = ""     #to stores formatted meeting minutes of the meeting
 
 
 class MeetingMinutesFlow(Flow[MeetingMinutesState]):
@@ -32,17 +32,18 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
     def transcribe_meeting(self):
         print("Generating Transcription")
 
-        SCRIPT_DIR = Path(__file__).parent
+        SCRIPT_DIR = Path(__file__).parent                #file path for the .wav file
         audio_path = str(SCRIPT_DIR / "EarningsCall.wav")
         
         # Load the audio file
         audio = AudioSegment.from_file(audio_path, format="wav")
         
         # Define chunk length in milliseconds (e.g., 1 minute = 60,000 ms)
-        chunk_length_ms = 60000
+        chunk_length_ms = 60000                                 #chunking audio is necessary because-
+                                                                #1.file size limit restriction 2.better accuracy 3.avoids timeout errors
         chunks = make_chunks(audio, chunk_length_ms)
 
-        # Transcribe each chunk
+        # Iterate over each chunk
         full_transcription = ""
         for i, chunk in enumerate(chunks):
             print(f"Transcribing chunk {i+1}/{len(chunks)}")
@@ -54,11 +55,11 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
                     model="whisper-1",                    ##an openai model to convert audio into text
                     file=audio_file
                 )
-                full_transcription += transcription.text + " "
+                full_transcription += transcription.text + " "   ##combined transcript
 
-        self.state.transcript = full_transcription
-        print(f"Transcription: {self.state.transcript}")
-
+        self.state.transcript = full_transcription        ##self.state is the instance/object of the class meetingminutes- state is automatically created. It is like what is the "state" of the work.It keeps track/status of the workflow
+        print(f"Transcription: {self.state.transcript}")  ##we could have self.trancript as object to store data but we cannot because we are using flow in this program therefore we a using self.state.transcript
+                                                           ##self.trancript or self.state.transcript is value of storing values 
     @listen(transcribe_meeting)
     def generate_meeting_minutes(self):
         print("Generating Meeting Minutes")
