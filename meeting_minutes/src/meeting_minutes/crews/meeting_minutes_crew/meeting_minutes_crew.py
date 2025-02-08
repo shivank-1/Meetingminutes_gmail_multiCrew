@@ -1,3 +1,4 @@
+#Multiple Crews Project
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import FileWriterTool
@@ -13,12 +14,13 @@ class MeetingMinutesCrew():
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
 
-	@agent
+	@agent                                            ##Two agents and two tasks
 	def meeting_minutes_summarizer(self) -> Agent:
 		return Agent(
 			config=self.agents_config['meeting_minutes_summarizer'],
-			tools=[file_writer_tool_summary, file_writer_tool_action_items, file_writer_tool_sentiment],
-		)
+			tools=[file_writer_tool_summary, file_writer_tool_action_items, file_writer_tool_sentiment],    ## file_writer_tool_summary- writes summaries of the meeting                         
+		)                                                                                                   ## file_writer_tool_action_items- extracts and write action items of the meeting like tasks,deadlines,etc
+	                                                                                                        ## file_writer_tool_sentiment- Analyzes the sentiment of the meeting, if the meeting was positive,negative or neutral 
 	
 	@agent
 	def meeting_minutes_writer(self) -> Agent:
@@ -47,3 +49,5 @@ class MeetingMinutesCrew():
 			process=Process.sequential,
 			verbose=True,
 		)
+
+##gmailCrew is added later

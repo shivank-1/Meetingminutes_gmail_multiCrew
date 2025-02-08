@@ -28,7 +28,7 @@ class MeetingMinutesState(BaseModel):       #a class inhereting properties of a 
 
 class MeetingMinutesFlow(Flow[MeetingMinutesState]):
 
-    @start()
+    @start()                        #used in arewai to mark the start of the flow
     def transcribe_meeting(self):
         print("Generating Transcription")
 
@@ -60,7 +60,7 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
         self.state.transcript = full_transcription        ##self.state is the instance/object of the class meetingminutes- state is automatically created. It is like what is the "state" of the work.It keeps track/status of the workflow
         print(f"Transcription: {self.state.transcript}")  ##we could have self.trancript as object to store data but we cannot because we are using flow in this program therefore we a using self.state.transcript
                                                            ##self.trancript or self.state.transcript is value of storing values 
-    @listen(transcribe_meeting)
+    @listen(transcribe_meeting)         #will execute only after @start function has executed
     def generate_meeting_minutes(self):
         print("Generating Meeting Minutes")
 

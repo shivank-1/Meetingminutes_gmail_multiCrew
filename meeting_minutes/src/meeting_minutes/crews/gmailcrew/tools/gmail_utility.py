@@ -9,9 +9,11 @@ from email.message import EmailMessage
 
 import markdown
 
-SCOPES = ['https://www.googleapis.com/auth/gmail.compose']
-
-HTML_TEMPLATE = """
+##scope for accessing Gmail API
+SCOPES = ['https://www.googleapis.com/auth/gmail.compose'] 
+                                
+##an HTML template to make email body                                
+HTML_TEMPLATE = """                        
     <!DOCTYPE html>
     <html lang="en">
     <head>

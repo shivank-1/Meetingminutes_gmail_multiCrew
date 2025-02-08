@@ -13,7 +13,7 @@ class GmailCrew():
 	def gmail_draft_agent(self) -> Agent:
 		return Agent(
 			config=self.agents_config['gmail_draft_agent'],
-			tools=[GmailTool()],
+			tools=[GmailTool()],    ##custom gmail tool
 			verbose=True
 		)
 
