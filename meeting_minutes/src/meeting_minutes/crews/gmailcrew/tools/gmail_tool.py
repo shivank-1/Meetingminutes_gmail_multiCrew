@@ -35,6 +35,6 @@ class GmailTool(BaseTool):
             message = create_message(sender, to, subject, message_text)
             draft = create_draft(service, "me", message)
 
-            return f"Email sent successfully! Draft id: {draft['id']}"
+            return f"Email drafted successfully in your gmail! Draft id: {draft['id']}"
         except Exception as e:
             return f"Error sending email: {e}"

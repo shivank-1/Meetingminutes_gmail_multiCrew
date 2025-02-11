@@ -1,8 +1,8 @@
-#importing libraries
+#importing libraries in our program
 from pydantic import BaseModel
-from crewai.flow.flow import Flow, listen, start
+from crewai.flow.flow import Flow, listen, start      
 from openai import OpenAI
-from pydub import AudioSegment
+from pydub import AudioSegment          
 from pydub.utils import make_chunks               
 from pathlib import Path
 
