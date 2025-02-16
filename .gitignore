@@ -11,7 +11,18 @@ meeting_minutes/agentops.log
 02 - ai_news
 03 - poem_flow
 code_execution
-pdf_rag
+db
 venv
 README.md
 requirements.txt
+meeting_minutes
+tools
+config
+chunk_0.wav
+chunk_1.wav
+chunk_2.wav
+action_items.txt
+crewai_flow.html
+sentiment.txt
+summary.txt
+
