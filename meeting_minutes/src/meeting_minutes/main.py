@@ -18,12 +18,12 @@ load_dotenv()
 client = OpenAI()
 
 #a container to store transcript and meeting minutes 
-class MeetingMinutesState(BaseModel):       #a class inhereting properties of a Basemodel of Pydantic
+class MeetingMinutesState(BaseModel):       #A class inhereting properties of a Basemodel of Pydantic
                                             #Pydantic's Basemodel ensures structure and validation to "state" of MeetingMinutes flow.
-                                            ###Validation in Pydantic means automatically checking that the data you assign to a model follows the expected data types and constraints. If the data does not match the expected format, Pydantic will raise an error.
+                                            ###Validation in pydantic means automatically checking that the data you assign to a model follows the expected data types and constraints. If the data does not match the expected format, Pydantic will raise an error.
    
-    transcript: str = ""          #to stores transcript of the meeting as a string
-    meeting_minutes: str = ""     #to stores formatted meeting minutes of the meeting
+    transcript: str = ""          #to store transcript of the meeting as a string
+    meeting_minutes: str = ""     #to store formatted meeting minutes of the meeting
 
 
 class MeetingMinutesFlow(Flow[MeetingMinutesState]):
