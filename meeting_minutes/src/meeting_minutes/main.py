@@ -1,4 +1,4 @@
-#importing required libraries in the program
+#importing required libraries in our program
 from pydantic import BaseModel
 from crewai.flow.flow import Flow, listen, start      
 from openai import OpenAI
